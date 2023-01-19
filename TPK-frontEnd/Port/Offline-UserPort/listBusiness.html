@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Bootstarp 框架 -->
+		<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../bootstrap-4.6.1/css/bootstrap.min.css">  
+		<script src="../../js/jquery-3.4.1.min.js"></script>
+		<script src="../../bootstrap-4.6.1/js/bootstrap.min.js"></script>
+		
+		<!-- 自己的CSS -->
+		<link rel="stylesheet" href="../../css/style.css">
+		<title>业务查询</title>
+		<style type="text/css">
+			td{
+				padding: 0.1875rem;
+				/* 设置超出部分用...表示 */
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		</style>
+		
+		<!-- 我的JS-->
+		<script src="../../js/constants.js"></script>
+		<script type="text/javascript" src="../../js/utils.js"></script>
+	</head>
+	<body>	
+		<div class="tpk-body-colum-bus">
+			<div class="tpk-body-column-first-item-80"  id="tpk-business-list">	
+				<!-- <div class="shadow p-3 mb-5 bg-white rounded tpk-card-long"> -->
+					<!-- <div class="tpk-top-box">
+						<div class="tpk-dot"></div>
+						<font class="tpk-font-box-state">状态：XXX</font>
+						<font class="tpk-font-box" size="3px" color="black">创建时间：YYYY-MM-DD hh:mm:ss</font>
+						<a href="" class="tpk-link-right">详情 >></a>
+					</div>
+					
+					<div class="tpk-center-box">
+						<font size="" color="" class="tpk-font-box-big">业务说明：</font>
+					</div>
+					
+					<div class="tpk-bottom-box">
+						<div class="tpk-bottom-box-item">所属档案：XXXXXXXXXXXX</div>
+						<div class="tpk-bottom-box-item">业务号：XXXXXXXXXXXXXXX</div>
+						<div class="tpk-bottom-box-item">业务发起途径：XX</div>
+						<div class="tpk-bottom-box-item">金额：XX.XX元</div>
+					</div> -->
+				<!-- </div> -->
+				<!-- <div class="tpk-card-long"></div>
+				<div class="tpk-card-long"></div> -->
+				
+				<!-- <div class="shadow p-3 mb-5 bg-white rounded tpk-card-long">
+					<table border="0px" width="100%" height="100%">
+						<tr height="20%" style="border-bottom: 2px solid #000000;">
+							<td colspan="1" width="8%">业务状态：XX</td>
+							<td colspan="2">
+								创建时间：YYYY-MM-DD hh:mm:ss
+							</td>
+							<td align="right"><a href="">详情 >></a></td>
+						</tr>
+						
+						<tr height="5%">
+							<td colspan="4">具体描述：</td>
+						</tr>
+						<tr height="30%">
+							<td colspan="4">
+								XXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXXXXX
+							</td>
+						</tr>
+						
+						<tr height="20%" style="border-top: 2px solid #000000">
+							<td width="30%">所属档案：XXXXXXXXXXXX</td>
+							<td>业务号：XXXXXXXXXX</td>
+							<td>发起途径：XX</td>
+							<td>金额：XXXX.XX</td>
+						</tr>
+					</table>
+				</div> -->
+			</div>
+			<!-- 分页条 -->
+			<div  class="tpk-body-second-item-20">
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination pagination-lg" id="pagingBar">
+					<!-- <li class="page-item"><a class="page-link" href="">Previous</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="">Next</a></li> -->
+				  </ul>
+				</nav>
+			</div>
+		</div>
+	</body>
+	
+	
+	<!-- jquery 脚本 -->
+	<script type="application/javascript">
+		
+		/**
+		 * 刷新页面元素
+		 * @param {Array} data --- business的数据 
+		 * */
+		function elementJoint(result){
+			//获取状态
+			var states,createTime,remark,recordNumber,busNumber,way,money,hrefs;
+			var text = "";
+			//遍历加载
+			for(var i = 0;i < result.length;i++){
+				//将数据赋值和拼接
+				states = result[i].progress;
+				//判断状态
+				if(states == 1){
+					states = "等待";
+				}
+				else if(states == 2){
+					states = "处理中";
+				}
+				else if(states == 3){
+					states = "处理完毕";
+				}else if(states == 0){
+					states = "已撤销";
+				}
+				
+				createTime = timeFormat(result[i].createdTime);
+				remark = result[i].remark;
+				recordNumber  = result[i].recordNumber;
+				busNumber = result[i].numbers;
+				//对发起途径的判断
+				way = result[i].way;
+				//判断发起途径
+				if(way == 1){
+					way = "线下";
+				}else if(way == 2){
+					way = "线上";
+				}
+				money = result[i].money;
+				hrefs = "./businessDetails?" + "recordNumber=" + recordNumber;
+				//显示在页面上的字符
+				text  = text + 
+					'<div class="shadow p-3 mb-5 bg-white rounded tpk-card-long" style="margin-bottom: 0rem;">' +
+						'<table border="0px" width="100%" height="100%">' +
+							'<tr height="20%" style="border-bottom: 2px solid #000000;">' +
+								'<td colspan="1" width="8%">' + '业务状态：'+ states + '</td>' +
+								'<td colspan="2">' + '创建时间：' + createTime + '</td>' +
+								'<td align="right"><a href="'+ hrefs +'">' + '详情 >></a></td>' +
+							'</tr>'	+
+							
+							'<tr height="5%">' + 
+								'<td colspan="4">具体描述：</td>' +
+							'</tr>' + 
+							'<tr height="30%">' +
+								'<td colspan="4">' +
+									remark +
+								'</td>' +
+							'</tr>' +
+							
+							'<tr height="20%" style="border-top: 2px solid #000000">' +
+								'<td width="30%">'+ '所属档案：' + recordNumber + '</td>' +
+								'<td>' + '业务号：' + busNumber + '</td>' +
+								'<td>' + '发起途径：' + way + '</td>' +
+								'<td>' + '金额：' + money + '元 </td>' +
+							'</tr>' +
+						'</table>' +
+					'</div>';
+			}
+			return text;
+		}		
+		//刷新分页条
+		/**
+		 * currentPage --- 当前页
+		 * totalPage --- 总数
+		 * */
+		var alltotalPage; 
+		 
+		function refreshPageBar(currentPage,totalPage){
+			var liHtml = "";
+			//开始判断并赋值
+			if(currentPage == 1){
+				liHtml = '<li class="page-item disabled" id="tpk-but-lastPage"><a class="page-link">上一页</a></li>';
+			}
+			else{
+				liHtml = '<li class="page-item" id="tpk-but-lastPage"><a class="page-link">上一页</a></li>';
+			}
+			
+			
+			// 循环显示页面下边的分页条
+			for(var i = currentPage;i < currentPage + 3 && i <= totalPage;i++){
+				if(i == currentPage){
+					liHtml = liHtml + '<li class="page-item tpk-but-pageItem active' + ' pageBar-'+ i + '"><a class="page-link">' + i + '</a></li>';
+					continue;
+				}
+				//控制显示<li></li>
+				liHtml = liHtml + '<li class="page-item tpk-but-pageItem' + ' pageBar-'+ i + '"><a class="page-link">' + i + '</a></li>';
+			}
+			
+			//下一页按钮判断并赋值
+			if(currentPage == totalPage){
+				liHtml = liHtml + '<li class="page-item disabled" id="tpk-but-nextPage"><a class="page-link">下一页</a></li>';
+			}else{
+				liHtml = liHtml + '<li class="page-item" id="tpk-but-nextPage"><a class="page-link">下一页</a></li>';
+			}
+			
+			//将数据刷新到
+			$("#pagingBar").html(liHtml);
+		}
+			
+		// flage -- 是否需要刷新分页条 true 为刷新分页条 false 为不刷新分页条
+		function ajaxRefresh(currentPage,rows){
+			//获取参数
+			$.ajax({
+				url: serverHttpURL + "/business/queryLimitBusinessByNumberforUser/" + currentPage + "/" + rows,
+				type: "GET",
+				dataType: "json",
+				success: function(json){
+					//成功后处理
+					if(json.state == 200){
+						//获取JSON返回值中的数据部分
+						var data = json.data;
+						var result = data.results;
+										
+						//刷新页面数据
+						var businessCard = elementJoint(result);
+						$("#tpk-business-list").html(businessCard);
+	
+						//获取总页数
+						var totalPage = data.totalPage;		
+						//计算分页开始页
+						// var startPage = (totalPage - 3 < 1) ? 1 : totalPage - 3;
+						//flage表示是否需要刷新分页条
+						
+						//将值设置到全局作用域中
+						alltotalPage = totalPage;
+						
+						refreshPageBar(currentPage,totalPage);
+					}
+				}
+			});
+		}
+		
+		//页面刷新时
+		$(document).ready(function(){
+			ajaxRefresh(1,3);
+		});
+		
+		// 上一页按钮事件
+		 $("#pagingBar").on("click","#tpk-but-lastPage",function(){
+			 var nowPage = $(this).siblings(".active");
+			 var nowPageNumber = Number(nowPage.text());
+			 var lastPageNumber = nowPageNumber-1;
+			 //判断，如果小于1则不需要进行去除操作
+			 if(lastPageNumber >= 1){
+				ajaxRefresh(lastPageNumber,3);
+				nowPage.removeClass("active");
+				nowPage.prev(".tpk-but-pageItem").addClass("active");
+			}
+		 });
+		 
+		 // 下一页按钮事件
+		 $("#pagingBar").on("click","#tpk-but-nextPage",function(){
+			var nowPage = $(this).siblings(".active");
+			var nowPageNumber = Number(nowPage.text());
+			console.log("nowPageNumber -->" + nowPageNumber);
+			var nextPageNumber = nowPageNumber + 1;
+			console.log("下一页 -->" + nextPageNumber);
+			 //判断，大于最大值就则不用刷新页面
+			 if(nextPageNumber <= alltotalPage){
+				ajaxRefresh(nextPageNumber,3);
+				nowPage.removeClass("active");
+				nowPage.next(".tpk-but-pageItem").addClass("active");
+			 }
+		 });
+		 
+		 // 各个页数按钮事件
+		 $("#pagingBar").on("click",".tpk-but-pageItem",function(){
+			 // alert("你好3");
+			 //获取元素
+			var pageNumber = $(this).children().text();
+			//将选中效果更换到点击的节点上
+			$(this).siblings(".tpk-but-pageItem").removeClass("active");
+			$(this).addClass("active");
+			
+			//刷新页面的数据
+			ajaxRefresh(pageNumber,3,false);
+		 });
+	</script>
+</html>

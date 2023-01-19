@@ -1,0 +1,45 @@
+#开发环境配置
+
+#配置端口
+server:
+  port: 8080
+  tomcat:
+#    max-http-form-post-size: -1
+    basedir: /home/xiaoxuan/web-jar/tomcat_temp
+
+#mysql数据库配置
+spring:
+  datasource:
+    url: jdbc:mysql://139.159.250.100:3306/TPK
+    username: xiaoxuan
+    password: Lin6280178
+  #spring直属servlet属性
+#  servlet:
+#    multipart:
+#      max-file-size: 300MB
+#      max-request-size: 300MB
+      #设定默认上传路径
+#      location: E:\Tomcat\temp_tomcat\upload
+
+#告诉mybatis mapper的xml位置在哪
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  type-handlers-package: com.minxuan.sms.handler
+
+
+#************自定义变量************
+#文件保存位置
+#paths:
+#  excels: E:\Tomcat\temp_tomcat\upload
+
+TPK:
+  adultLimit: 0
+  portURL: http://139.159.250.100:8081
+  #权限设置
+  authority:
+    #业务员所在组，不匹配的会不允许登录
+    EmpGroup: 2
+  #容器设置
+  online-container:
+    #容器容量
+    capacity:  4

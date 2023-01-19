@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<!-- Bootstarp 框架 -->
+		<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../bootstrap-4.6.1/css/bootstrap.min.css">  
+		<script src="../../js/jquery-3.4.1.min.js"></script>
+		<script src="../../bootstrap-4.6.1/js/bootstrap.min.js"></script>
+		
+		<!-- 我的css样式 -->
+		<link rel="stylesheet" href="../../css/style.css">
+		
+		<!-- 我的js -->
+		<script src="../../js/utils.js"></script>
+		<script src="../../js/constants.js"></script>
+		<title>用户注册</title>
+	</head>
+	<body>
+		<div class="tpk-body-colum">
+			<h2>
+				<font size="80px"><b>用 户 注 册</b></font>
+			</h2>
+			
+			<form id="log-from" class="form-horizontal tpk-form-40" role="form tpk-form-center">
+			  <div class="form-group" style="width: 100%">
+				<input type="text" class="form-control tpk-input-30" name="idCard" id="idCard" placeholder="请 输 入 身 份 证 号">
+			  </div>
+			  
+			<a href="./index.html" style="width: 30%;" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">主&nbsp;页</a>
+			<button type="button" id="tpk-btn-next" class="btn btn-primary btn-lg" style="width: 69%;">下&nbsp;一&nbsp;步</button>
+			  
+			</form>
+		</div>
+	</body>
+	
+	<script>
+		// js登录事件
+		
+		$("#tpk-btn-next").click(function() {
+			// 获取idCard
+			var idCard = $("#idCard").val();
+			// 判断idCard是否合法
+			if(idcardVerify(idCard)){
+				location.href="./register-next.html?idCard=" + idCard
+			}
+			else{
+				// 不合法提示并清空idCard输入框
+				alert("身份证不合法-身份证位数为18位");
+			}
+		});
+		
+	
+	</script>
+</html>

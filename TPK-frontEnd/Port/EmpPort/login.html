@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>简约登录页面Js粒子动态背景 - -</title>
+    <link rel="stylesheet" media="screen" href="../../BEmpPort-style/login/css/login.css">
+	<!-- jquery -->
+	<script src="../../js/jquery-3.4.1.min.js"></script>
+	<!-- 我的js-->
+	<script src="../../js/constants.js"></script>
+	<script src="../../js/jquery-getUrlParam.js"></script>
+  </head>
+  
+  <body>
+    <!-- particles.js container -->
+	<div id="particles-js" style="display: flex;align-items: center;justify-content: center">
+      <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;" width="472" height="625"></canvas>
+	</div>
+	
+    <div class="apTitle">TPK银行业务处理系统-业务端</div>
+    <div class="logcon">
+      <input type="text" id="empNumber" placeholder="登录工号" style="width: 25%;">
+      <button type="button" id="tpk-btn-log">登录</button>
+    </div>
+	
+	<!-- scripts 特效导入-->
+	<script src="../../BEmpPort-style/login/js/login.js"></script>
+	<script src="../../BEmpPort-style/login/js/loginApp.js"></script>
+	
+
+
+	<!-- Jquery发送Ajax请求 -->
+	<script>
+		//发送Ajax请求
+		$("#tpk-btn-log").click(function(){
+			//获取empNumber
+			var empNumber = $("#empNumber").val();
+			//发送Ajax请求
+			$.ajax({
+				url: serverHttpURL + "/emp/login/"+ empNumber +"/1",
+				type: "GET",
+				xhrFields: {withCredentials: true}, //允许带上凭据
+				dataType: "JSON",
+				success: function(data){
+					if(data.state == 200){
+						//登录成功报出提示并跳转页面
+						alert("登录成功！！！");
+						location.href = "./index.html";
+					}else{
+						// 登录失败报告提示
+						alert("登录失败！！！，" + data.message);
+					}
+				},
+				error:function (xhr){
+					alert("登录时产生未知的异常，"+xhr.message);
+				}
+			});
+		});	
+	</script>
+
+  </body>
+</html>

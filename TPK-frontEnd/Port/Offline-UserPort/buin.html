@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Bootstarp 框架 -->
+	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../bootstrap-4.6.1/css/bootstrap.min.css">  
+	<script src="../../js/jquery-3.4.1.min.js"></script>
+	<script src="../../bootstrap-4.6.1/js/bootstrap.min.js"></script>
+	
+	<title>业 务 申 请</title>
+    <link href="../../booktemplate/css/all.css" rel="stylesheet" type="text/css">
+    <link href="../../booktemplate/js/editor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../booktemplate/js/editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+	
+	<script src="../../js/constants.js"></script>
+	<script src="../../js/utils.js"></script>
+	
+</head>
+
+<body style="background-color: #e9ecef">
+	<div class="book_con01">
+		<form id="form_demo" >   
+			<p class="book_p">
+				<table class="book_table" border="1" cellpadding="10">
+					<!-- 标题 -->
+					<tr>
+						<td colspan="4" style="text-align: center; font-size: 2rem;">业 务 申 请</td>
+					</tr>
+					
+					<!-- 第一行 -->
+					<tr>
+						<td><label class="td_label">业 务 大 类</label></td>
+						<td style="padding-right: 0.3125rem;">
+							<select class="form-control form-control-lg" id="firstGrade">
+							  <!-- <option>---请选择---</option> -->
+							</select>
+						</td>
+
+						<td><label class="td_label">业 务 小 类</label></td>
+						<td style="padding-right: 0.3125rem;">
+							<select class="form-control form-control-lg" id="secondGrade">
+							  <!-- <option>Large select</option> -->
+							</select>
+						</td>
+					</tr>
+					
+					<!-- 第三行 -->
+					<tr>
+						<td><label class="td_label">申 请 人</label></td>
+						<td id="name"></td>
+
+						<td><label class="td_label">联 系 电 话</label></td>
+						<td>
+							<input class="form-control" id="phone" name=phone"" type="text">
+						</td>
+					</tr>
+					
+					<!-- 第四行 -->
+					<tr>
+						<td><label class="td_label">性 别</label></td>
+						<td id="gender">
+							
+						</td>
+					
+						<td><label class="td_label">年 龄</label></td>
+						<td id="old">
+							
+						</td>
+					</tr>
+					
+					<!-- 最后一行 -->
+					<tr>
+						<td>
+							<label class="td_label" style="padding-top:1rem;">备 注</label>
+							</td><td colspan="3">
+							<!-- <textarea  class="textArae" id="remark" placeholder="0~225个字符"></textarea> -->
+							<textarea id="remark" class="textArae form-control" aria-label="With textarea" placeholder="0~255个字符"></textarea>
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="padding-top:1rem;">
+							<label class="td_label">业务金额(RMB)</label><i class="i_start"></i>
+						</td>
+						<td colspan="5" style="padding-left:1rem;" id="price"></td>
+					</tr>
+				</table>
+			</p>
+			
+			<p class="book_foot">
+				<a href="./index.html" type="button" class="btn btn-dark">回到主页</a>
+				<button type="button" id="reset" class="btn btn-danger">重 置</button>
+				<button id="btn-submit" type="button" class="btn btn-primary">提 交</button>
+			</p>
+		</form>
+	</div>
+	
+	<!-- MY JQUERY -->
+	<script type="text/javascript">
+		//默认选项
+		var defaultOption = '<option value="0">----- 请选择 -----</option>';
+	
+		//页面初始化时将
+		$(document).ready(function(){
+			showUserName();
+			showFirstGrade();
+			$("#price").html("￥");
+			$("#secondGrade").append(defaultOption);
+		});
+		
+		//刷新默认的数据
+		function showUserName(){
+			$.ajax({
+				url: serverHttpURL + "/user/getData",
+				type: "GET",
+				xhrFields: {withCredentials: true},
+				dataType: "json",
+				success: function(json){
+					if(json.state == 200){
+						var userdata = json.data;
+						//将数据刷新到网页上
+						$("#name").append(userdata.name);
+						//设置性别
+						if(userdata.gender == 0){
+							$("#gender").append("女");
+						}else{
+							$("#gender").append("男");
+						}
+						//设置年龄
+						$("#old").append(userdata.age + "岁");
+					}
+					else{
+						alert("错误：" + json.message);
+						location.href = "./index.html";
+					}
+				},
+				error:function (xhr){
+					alert("错误：" + xhr.message );
+					location.href = "./index.html";
+				}
+			});
+		}
+		
+		//刷新第一类
+		function showFirstGrade(){
+			$("#firstGrade").append(defaultOption);
+			$.ajax({
+				url: serverHttpURL + "/btprice/00000",
+				type: "GET",
+				dataType: "JSON",
+				success: function(json){
+					if(json.state = 200){
+						let list = json.data;
+						for(let i = 0;i < list.length;i++){
+							let option = '<option value="' + list[i].codes + '">' + list[i].name + '</option>';
+							$("#firstGrade").append(option);
+						}
+					}
+					else{
+						alert("登录失效，请重新登录！！！");
+						location.href = "./index.html";
+					}
+				},
+				error:function (xhr){
+					alert("错误：" + xhr.message);
+					location.href = "./";
+				}
+			});
+		}
+		
+		
+		//在firstGrade的元素发生改变时请求刷新secondGrade
+		$("#firstGrade").change(function(){
+			$("#price").html("￥");
+			showSecondGrade();
+		});
+	
+		//使用parent查询
+		function showSecondGrade(){
+			//获取选中的数据value
+			var parent = $("#firstGrade").val();
+			
+			$("#secondGrade").empty();
+			$("#secondGrade").append(defaultOption);
+			
+			//如果为 0我们就结束方法执行
+			if(parent == 0){
+				return;
+			}
+			
+			//通过后添加ajax请求
+			$.ajax({
+				url: serverHttpURL + "/btprice/" + parent,
+				type: "GET",
+				dataType: "JSON",
+				success: function(json){
+					if(json.state == 200){
+						let list = json.data;
+						for(let i = 0;i < list.length;i++){
+							let option = '<option value="' + list[i].codes + '">' + list[i].name + '</option>';
+							$("#secondGrade").append(option);
+						}
+					}
+				},
+				error:function (xhr){
+					alert("错误：" + xhr.message );
+					location.href = "./index.html";
+				}
+			});
+		}	
+		
+		
+		$("#secondGrade").change(function(){
+			getPrice();
+		});
+		
+		//刷新业务金额方法
+		function getPrice(){
+			//获取选中的数据value
+			var codes = $("#secondGrade").val();
+			//判断是否为 0
+			if(codes == 0){
+				$("#price").html("￥");
+				return;
+			}
+			
+			$.ajax({
+				url: serverHttpURL + "/btprice/getPrice/" + codes,
+				type: "GET",
+				dataType: "json",
+				success: function(json){
+					if(json.state = 200){
+						console.log(json);
+						$("#price").html("￥" + json.data);
+					}
+					else{
+						alert("错误：" + json.message);
+						location.href = "./index.html";
+					}
+				},
+				error:function (xhr){
+					alert("错误：" + xhr.message );
+					location.href = "./index.html";
+				}
+			});
+		}
+		
+		//重置按钮事件
+		$("#reset").click(function(){
+			reset();
+		});
+		
+		//重置方法
+		function reset(){
+			$("#firstGrade").val("0");
+			$("#secondGrade").val("0");
+			$("#phone").val("");
+			$("#remark").val("");
+			$("#price").html("￥");
+		}		
+		
+		//按钮提交事件
+		$("#btn-submit").click(function(){
+			//获取参数
+			var businessType = $("#secondGrade").val();
+			var remark = $("#remark").val();
+			var price = $("#price").text();
+			var phone = $("#phone").val();
+			var who = "用户：" + $("#name").text();
+			
+			
+			//判断类型是否为0
+			if(businessType == 0){
+				alert("请选择业务类型");
+				return;
+			}
+			
+			//判断phone是否正确
+			if(!(confirmPhone(phone))){
+				alert("手机位数不正确，位数需11位且不能为空！！！");
+				return;
+			}
+			
+			//判断备注验证
+			if(!(confirmRemark(remark))){
+				alert("备注位数超出！！！");
+				return;
+			}
+			
+			//刷新remark值
+			if(remark.length == 0){
+				remark = null;
+			}
+			
+			//将价格的单位￥去掉
+			if(price.length > 0){
+				price = price.replace("￥","");
+			}
+			
+			//发送Ajax请求
+			$.ajax({
+				url: serverHttpURL + "/business/userBuni/" + businessType + "/" + remark + "/" + price + "/" + phone + "/2/" + who,
+				type: "POST",
+				xhrFields: {withCredentials: true},
+				dataType: "JSON",
+				success: function(json){
+					console.log(json);
+					if(json.state == 200){
+						alert("成功！！！");
+						location.href = "./index.html";
+					}else{
+						alert("申请失败，" + json.message);
+					}
+				},
+				error: function(xhr){
+					alert("错误：" + xhr.message );
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+#开发环境配置
+
+#配置端口
+server:
+  port: 8080
+  tomcat:
+    max-http-form-post-size: -1
+    basedir: /home/minxl/environment/tomcat/temp
+
+#mysql数据库配置
+spring:
+  #mysql数据库链接
+  datasource:
+    url: jdbc:mysql://139.159.250.100:3306/TPK
+    username: xiaoxuan
+    password: Lin6280178
+  #热部署开关
+#  devtools:
+#    restart:
+#      enabled: true
+
+
+  #修改这个属性
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #spring直属servlet属性
+  servlet:
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
+      #设定默认上传路径r
+      location: /home/minxl/environment/tomcat/upload
+
+#告诉mybatis mapper的xml位置在哪
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  type-handlers-package: com.minxuan.sms.handler
+
+#log4j2配置文件导入
+logging:
+  config: classpath:log4j2-dev.xml
+  file:
+    path: /home/minxl/environment/tomcat/logs
+
+#文件保存位置
+paths:
+  excels: /home/minxl/environment/tomcat/upload
+
+TPK:
+  adultLimit: 0
+  portURL: http://139.159.250.100:8081
+  #权限设置
+  authority:
+    #业务员所在组，不匹配的会不允许登录
+    EmpGroup: 2
+  #容器设置
+  online-container:
+    #容器容量
+    capacity: 4

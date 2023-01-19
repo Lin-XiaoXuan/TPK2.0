@@ -1,0 +1,13 @@
+2023-01-15 14:31:25.076 [32mINFO [m[background-preinit] [36morg.hibernate.validator.internal.util.Version[m : HV000001: Hibernate Validator 6.2.4.Final
+2023-01-15 14:31:25.176 [32mINFO [m[restartedMain] [36mcom.njustjjy.tpk2.TpkApplication[m : Starting TpkApplication using Java 1.8.0_351 on kali-hacker-MinXL with PID 12376 (/media/minxl/文件磁盘/学习文件/Project/JAVA/IDEA/TPK2.0/TPK-Code/target/classes started by minxl in /media/minxl/文件磁盘/学习文件/Project/JAVA/IDEA/TPK2.0/TPK-Code)
+2023-01-15 14:31:25.232 [32mINFO [m[restartedMain] [36mcom.njustjjy.tpk2.TpkApplication[m : The following 1 profile is active: "dev"
+2023-01-15 14:31:29.125 [32mINFO [m[restartedMain] [36morg.apache.coyote.http11.Http11NioProtocol[m : Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-15 14:31:29.126 [32mINFO [m[restartedMain] [36morg.apache.catalina.core.StandardService[m : Starting service [Tomcat]
+2023-01-15 14:31:29.127 [32mINFO [m[restartedMain] [36morg.apache.catalina.core.StandardEngine[m : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-01-15 14:31:29.244 [32mINFO [m[restartedMain] [36morg.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/][m : Initializing Spring embedded WebApplicationContext
+2023-01-15 14:31:29.321 [32mINFO [m[restartedMain] [36mcom.zaxxer.hikari.HikariDataSource[m : HikariPool-1 - Starting...
+2023-01-15 14:31:30.282 [32mINFO [m[restartedMain] [36mcom.zaxxer.hikari.HikariDataSource[m : HikariPool-1 - Start completed.
+2023-01-15 14:31:34.447 [32mINFO [m[restartedMain] [36morg.apache.coyote.http11.Http11NioProtocol[m : Starting ProtocolHandler ["http-nio-8080"]
+2023-01-15 14:31:34.926 [32mINFO [m[restartedMain] [36mcom.njustjjy.tpk2.TpkApplication[m : Started TpkApplication in 11.182 seconds (JVM running for 13.013)
+2023-01-15 14:46:12.397 [32mINFO [m[SpringApplicationShutdownHook] [36mcom.zaxxer.hikari.HikariDataSource[m : HikariPool-1 - Shutdown initiated...
+2023-01-15 14:46:12.421 [32mINFO [m[SpringApplicationShutdownHook] [36mcom.zaxxer.hikari.HikariDataSource[m : HikariPool-1 - Shutdown completed.

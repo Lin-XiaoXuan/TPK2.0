@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njustjjy.tpk2.dao.BtpriceMapper">
+    <resultMap id="BtpriceMap" type="com.njustjjy.tpk2.entity.Btprice">
+        <id column="pid" property="pid"></id>
+        <result column="create_time" property="createTime"></result>
+        <result column="create_user" property="createUser"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="remark" property="remark"></result>
+    </resultMap>
+
+    <!-- 查询 -->
+    <select id="queryAllBusinessType" resultMap="BtpriceMap" resultType="com.njustjjy.tpk2.entity.Btprice">
+        select * from btprice;
+    </select>
+
+    <!--by codes ASC降序自增-->
+    <select id="findByParent" resultType="java.util.List" resultMap="BtpriceMap">
+        SELECT * FROM btprice WHERE parent = #{parent} ORDER BY codes ASC
+    </select>
+
+    <!--根据codes 查询名字-->
+<!--    <select id="findNameBycode" resultType="java.lang.String">-->
+<!--        SELECT name FROM btprice WHERE codes = #{codes}-->
+<!--    </select>-->
+    <!--根据codes查询价格-->
+    <select id="findPriceByCodes" resultType="java.lang.Double">
+        SELECT price FROM btprice WHERE codes = #{codes}
+    </select>
+
+
+<!--    根据codes查询对应数据-->
+    <select id="queryBtpriceByCodes" resultType="com.njustjjy.tpk2.entity.Btprice" resultMap="BtpriceMap">
+        SELECT * FROM btprice WHERE codes = #{codes}
+    </select>
+</mapper>

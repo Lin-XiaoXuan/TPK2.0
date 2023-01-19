@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Applicator - Admin Dashboard Template</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" href="assets/images/logo/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../../BEmpPort-style/main/picture/favicon.png">
+    <!-- core dependcies css -->
+    <link rel="stylesheet" href="../../BEmpPort-style/main/css/bootstrap.css">
+    <link rel="stylesheet" href="../../BEmpPort-style/main/css/pace-theme-minimal.css">
+    <link rel="stylesheet" href="../../BEmpPort-style/main/css/perfect-scrollbar.min.css">
+    <!-- page css -->
+    <link rel="stylesheet" href="../../BEmpPort-style/main/css/dataTables.bootstrap4.min.css">
+    <!-- core css -->
+    <link href="../../BEmpPort-style/main/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../BEmpPort-style/main/css/themify-icons.css" rel="stylesheet">
+    <link href="../../BEmpPort-style/main/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="../../BEmpPort-style/main/css/animate.min.css" rel="stylesheet">
+    <link href="../../BEmpPort-style/main/css/app.css" rel="stylesheet">
+	
+	<!-- JS -->
+	<script src="../../js/constants.js"></script>
+	<script src="../../js/jquery-3.4.1.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="app header-success-gradient">
+      <div class="layout">
+        <!-- Header START -->
+        <div class="header navbar">
+          <div class="header-container">
+            <div class="nav-logo">
+              <a href="index.html">
+                <div class="logo logo-dark" style="background-image: url('../../BEmpPort-style/main/picture/logo.png')">
+                </div>
+                <div class="logo logo-white" style="background-image: url('../../BEmpPort-style/main/picture/logo-white.png')">
+                </div>
+              </a>
+            </div>
+            <ul class="nav-left">
+              <li>
+                <a class="sidenav-fold-toggler" href="javascript:void(0);">
+                  <i class="mdi mdi-menu">
+                  </i>
+                </a>
+                <a class="sidenav-expand-toggler" href="javascript:void(0);">
+                  <i class="mdi mdi-menu">
+                  </i>
+                </a>
+              </li>
+			
+              <li class="search-input">
+                <input class="form-control" type="text" placeholder="Type to search...">
+                <div class="search-predict">
+                  <div class="search-wrapper scrollable">
+                    <div class="p-v-10">
+                      <span class="display-block m-v-5 p-h-20 text-gray">
+                        <i class="ti-file p-r-5">
+                        </i>
+                        <span>Files</span>
+                      </span>
+					  
+                      <ul class="list-media">
+                        <li class="list-item">
+                          <a href="javascript:void(0);" class="media-hover p-h-20">
+                            <div class="media-img">
+                              <div class="icon-avatar bg-success">
+                                <i class="mdi mdi-file-outline">
+                                </i>
+                              </div>
+                            </div>
+                            <div class="info">
+                              <span class="title p-t-10">Document.xls</span>
+                            </div>
+                          </a>
+                        </li>
+						
+                        <li class="list-item">
+                          <a href="javascript:void(0);" class="media-hover p-h-20">
+                            <div class="media-img">
+                              <div class="icon-avatar bg-info">
+                                <i class="mdi mdi-file-outline">
+                                </i>
+                              </div>
+                            </div>
+                            <div class="info">
+                              <span class="title p-t-10">Mockup.doc</span>
+                            </div>
+                          </a>
+                        </li>
+						
+                        <li class="list-item">
+                          <a href="javascript:void(0);" class="media-hover p-h-20">
+                            <div class="media-img">
+                              <div class="icon-avatar bg-danger">
+                                <i class="mdi mdi-file-outline">
+                                </i>
+                              </div>
+                            </div>
+                            <div class="info">
+                              <span class="title p-t-10">Document.pdf</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="m-h-20 border top"></div>
+					
+                    <div class="p-v-10">
+                      <span class="display-block m-v-5 p-h-20 text-gray">
+                        <i class="ti-user p-r-5">
+                        </i>
+                        <span>Members</span>
+                      </span>
+					  
+                      <ul class="list-media">
+						  
+                        <li class="list-item">
+                          <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
+                            <div class="media-img">
+                              <img src="../../BEmpPort-style/main/picture/thumb-3.jpg" alt="">
+                            </div>
+                            <div class="info">
+                              <span class="title p-t-10">Debra Stewart</span>
+                            </div>
+                          </a>
+                        </li>
+						
+                        <li class="list-item">
+                          <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
+                            <div class="media-img">
+                              <img src="../../BEmpPort-style/main/picture/thumb-5.jpg" alt="">
+                            </div>
+                            <div class="info">
+                              <span class="title p-t-10">Jane Hunt</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+			
+            <ul class="nav-right">
+              <li class="dropdown dropdown-animated scale-left">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="mdi mdi-apps"></i>
+                </a>
+				<!-- 右上角UI -->
+                <ul class="dropdown-menu dropdown-grid col-3 dropdown-lg">
+                  <li>
+                    <a href="">
+                      <div class="text-center">
+                        <i class="mdi mdi-email-outline font-size-30 icon-gradient-success">
+                        </i>
+                        <p class="m-b-0">Email</p>
+                      </div>
+                    </a>
+                  </li>
+				  
+                  <li>
+                    <a href="">
+                      <div class="text-center">
+                        <i class="mdi mdi-folder-outline font-size-30 icon-gradient-success">
+                        </i>
+                        <p class="m-b-0">Files</p>
+                      </div>
+                    </a>
+                  </li>
+				  
+                  <li>
+                    <a href="">
+                      <div class="text-center">
+                        <i class="mdi mdi mdi-gauge font-size-30 icon-gradient-success">
+                        </i>
+                        <p class="m-b-0">Dashboard</p>
+                      </div>
+                    </a>
+                  </li>               
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+		
+        <!-- Header END -->
+        <!-- Side Nav START -->
+        <!-- <div class="side-nav expand-lg">
+          <div class="side-nav-inner">
+            <ul class="side-nav-menu scrollable">
+              <li class="side-nav-header">
+                <span>业务员：</span>
+              </li>
+              
+              <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                  <span class="icon-holder">
+                    <i class="mdi mdi-compass-outline"></i>
+                  </span>
+				  
+                  <span class="title">业务处理</span>
+                </a>
+              </li>               
+            </ul>
+          </div>
+        </div> -->
+
+        <!-- <div class="page-container"> -->
+          <div class="main-content">
+            <div class="container-fluid">
+              <div class="page-header">
+                <h2 class="header-title">Data Table</h2>
+                <div class="header-sub-title">
+                  <nav class="breadcrumb breadcrumb-dash">
+                    <a href="#" class="breadcrumb-item">
+                      <i class="ti-home p-r-5">
+                      </i>Home</a>
+                    <a class="breadcrumb-item" href="#">Tables</a>
+                    <span class="breadcrumb-item active">Data Table</span>
+                  </nav>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-overflow">
+                    <table id="dt-opt" class="table table-hover table-xl">
+						<!--表头-->
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>业务ID</th>
+								<th>状态</th>
+								<th>所属档案</th>
+								<th>发起时间</th>
+								<th>业务金额</th>
+								<th style="text-align: center;">操作</th>
+							</tr>
+						</thead>
+												
+						<!-- 表主体 -->
+						<tbody id="tpk-table-body">
+							
+						</tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		
+          <!-- Content Wrapper END -->
+          <!-- Footer START -->
+          <footer class="content-footer">
+            <div class="footer">
+              <div class="copyright">
+                <span>Copyright (c) 2018
+					<b class="text-dark">Theme_Nate</b>. All rights By
+					<span class="go-right">
+						<a href="" class="text-gray m-r-15">Term &amp;Conditions</a>
+						<a href="" class="text-gray">Privacy &amp;Policy</a>
+					</span>
+              </div>
+            </div>
+          </footer>
+          <!-- Footer END -->
+        </div>
+        <!-- Page Container END -->
+      </div>
+    <!-- </div> -->
+	
+	<script type="text/javascript">
+		//数据刷新方法
+		function refreshBusiness(data,id){
+			var numbers = data.numbers;
+			var progress = data.progress;
+			//进度处理
+			if(progress == 1){
+				progress = '<span class="badge badge-pill badge-info">等待</span>';
+			}else{
+				progress = '<span class="badge badge-pill badge-primary">处理中</span>';
+			}
+			
+			var recordNumber = data.recordNumber;
+			var createdTime = data.createdTime;
+			var money = data.money.toFixed(2);
+
+			
+			var text = '<tr>' +
+							'<td id="ids">' + (id+1) + '</td>' +
+							'<td id="numbers">' + numbers + '</td>' +
+							'<td id="progress">' + progress + '</td>' + 
+							'<td id="recordNumber">'+ recordNumber +'</td>' + 
+							'<td id="createdTime">'+ createdTime +'</td>' +
+							'<td id="money">'+ money +'</td>' +
+							'<td class="text-center font-size-18">' +
+									'<button class="btn btn-info btn-rounded btn-dispose">处理</button>' +
+									'<button class="btn btn-danger btn-rounded">报错</button>' +
+							'</td>'
+						'</tr>';
+			
+			return text;
+		}
+		
+		//webScoket 全局变量
+		// var ws;
+		
+		//刷新页面时创建链接
+		$(function(){
+			//创建webSocket链接
+			var websocket = new WebSocket(serverWebSocketURL + "/empScoket");
+			
+			// websocket.onopen = function(evt){
+				
+			// };
+			
+			websocket.onmessage = function(evt){
+				//转换数据为JSON对象
+				var json = JSON.parse(evt.data);
+				//获取数据和state
+				var data = json.data;
+				var state = json.state;
+				
+				var values = "";
+				for(let i = 0;i < data.length;i++){
+					values = values + refreshBusiness(data[i],i);
+				}
+				$("#tpk-table-body").html(values);
+			};
+			
+			websocket.onerror = function(evt){
+				
+			};
+			
+			websocket.onclose = function(evt){
+				
+			};
+			
+			//委托按钮事件
+			$("#tpk-table-body").on("click","tr > .text-center > .btn-dispose",function(){
+				//获取numbers
+				var businessNumber = $(this).parent().siblings("#numbers").text();
+				//获取recordNumber
+				var recordNumber = $(this).parent().siblings("#recordNumber").text();
+				
+				
+				//这里调用呼号并改变对应的数据库信息
+				$.ajax({
+					url: serverHttpURL + "/business/updateBusinessProgree/" + businessNumber + "/2/业务员修改",
+					type: "GET",
+					xhrFields: {withCredentials: true},
+					dataType: "json",
+					success: function(data) {
+						if(data.state == 200){
+							//呼号操作
+							callSong(businessNumber,recordNumber);
+							//成功跳转页面
+							location.href="./businessDispose.html?businessNumber="+businessNumber;
+						}
+						else{
+							alert("失败，" + data.message);
+						}
+					},
+					error:function (xhr){
+						alert("产生未知的异常"+xhr.message);
+					}
+				});
+			});
+		});
+		
+		//呼号请求
+		function callSong(businessNumbers,recordNumber){
+			$.ajax({
+				url: serverHttpURL + "/business/callSign/"+ businessNumbers +"/" + recordNumber,
+				type: "GET",
+				xhrFields: {withCredentials: true}, //允许带上凭据
+				dataType: "JSON",
+				error:function (xhr){
+					alert("登录时产生未知的异常，"+xhr.message);
+				}
+			});
+		}
+	</script>
+	
+    <!-- build:js assets/js/vendor.js -->
+    <!-- core dependcies js -->
+    <script src="../../BEmpPort-style/main/js/popper.min.js"></script>
+    <script src="../../BEmpPort-style/main/js/bootstrap.js"></script>
+    <script src="../../BEmpPort-style/main/js/pace.min.js"></script>
+    <script src="../../BEmpPort-style/main/js/perfect-scrollbar.jquery.js"></script>
+    <script src="../../BEmpPort-style/main/js/d3.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js assets/js/app.min.js -->
+    <!-- core js -->
+    <script src="../../BEmpPort-style/main/js/app.js"></script>
+    <!-- configurator js -->
+    <script src="../../BEmpPort-style/main/js/configurator.js"></script>
+    <!-- endbuild -->
+    <!-- page js -->
+    <!-- <script src="../../BEmpPort-style/main/js/jquery.dataTables.js"></script>
+    <script src="../../BEmpPort-style/main/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../BEmpPort-style/main/js/data-table.js"></script> -->
+  </body>
+  </html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njustjjy.tpk2.dao.RecordMapper">
+    <resultMap id="RecordMap" type="com.njustjjy.tpk2.entity.Record">
+        <id column="rid" property="rid"></id>
+        <result column="isdelete" property="isDelete"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="create_user" property="createUser"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="remark" property="remark"></result>
+    </resultMap>
+    <!--增加-->
+    <insert id="addRecord">
+        insert into record(idCard,number,password,salt,level,created_time,created_user)
+        values(#{idCard},#{number},#{password},#{salt},#{level},#{createdTime},#{createdUser})
+    </insert>
+
+    <!--修改-->
+    <update id="updateRecordByRid" parameterType="com.njustjjy.tpk2.entity.Record">
+        update record
+        <set>
+            <if test="idCard != null">idCard = #{idCard},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="salt != null">salt = #{salt},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="isDelete != null">isDelete = #{isDelete},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="createdUser != null">created_user = #{createdUser},</if>
+            <if test="modifiedTime != null">modified_time = #{modifiedTime},</if>
+            <if test="modifiedUser != null">modified_user = #{modifiedUser},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="rid != null">rid = #{rid}</if>
+        </set>
+        where rid = #{rid}
+    </update>
+    <!--删除-->
+
+    <!--查询-->
+    <select id="queryRecordByidCard" resultType="com.njustjjy.tpk2.entity.Record" parameterType="java.lang.String" resultMap="RecordMap">
+        select * from record where idCard = #{idCard} and isdelete = 0
+    </select>
+
+    <select id="queryRecordByRecordNumber" resultType="com.njustjjy.tpk2.entity.Record" parameterType="java.lang.String" resultMap="RecordMap">
+        select * from record where number = #{recordNumber} and isdelete = 0
+    </select>
+
+    <select id="queryRecordByRid" parameterType="java.lang.Integer" resultMap="RecordMap">
+        select * from record where rid = #{rid} and isdelete = 0
+    </select>
+</mapper>

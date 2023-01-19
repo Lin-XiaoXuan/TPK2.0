@@ -1,0 +1,1 @@
+"use strict";+function(a,c){var b={};b.init=function(){a(".chat-app .list-media .list-item, .chat-app .chat-content .conversation-toggler").on("click",function(d){a(".chat-content").toggleClass("open");d.preventDefault()})};c.chat=b}(jQuery,window);+function(a){chat.init()}(jQuery);

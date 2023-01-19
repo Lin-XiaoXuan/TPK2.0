@@ -1,0 +1,1 @@
+"use strict";+function(a,c){var b={};b.init=function(){a("#dt-opt").DataTable()};c.dataTables=b}(jQuery,window);+function(a){dataTables.init()}(jQuery);

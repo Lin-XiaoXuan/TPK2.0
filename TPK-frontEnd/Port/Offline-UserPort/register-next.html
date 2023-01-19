@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Bootstarp 框架 -->
+		<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../bootstrap-4.6.1/css/bootstrap.min.css">  
+		<script src="../../js/jquery-3.4.1.min.js"></script>
+		<script src="../../bootstrap-4.6.1/js/bootstrap.min.js"></script>
+		
+		<!-- 我的js插件 -->
+		<script src="../../js/utils.js"></script>
+		<script src="../../js/constants.js"></script>
+		<script src="../../js/jquery-getUrlParam.js"></script>
+		
+		<!-- 我的CSS -->
+		<link rel="stylesheet" href="../../css/style.css">
+		<title></title>
+	</head>
+	
+	<body>
+		<div class="tpk-body-colum">
+			<h2>
+				<font size="80px"><b>档 案 密 码</b></font>
+			</h2>
+			
+			<form id="log-from" class="form-horizontal tpk-form-40" role="form tpk-form-center">
+			  <div class="form-group" style="width: 100%">
+				<input type="password" class="form-control tpk-input-30" name="firstPass" id="firstPass" placeholder="请 设 置 档 案 密 码">
+				<br>
+				<input type="password" class="form-control tpk-input-30" name="secondPass" id="secondPass" placeholder="确 认 密 码">
+			  </div>
+			  
+			<a href="./register.html" style="width: 30%;" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">上 一 步</a>
+			<button type="button" id="tpk-btn-next" class="btn btn-primary btn-lg" style="width: 69%;">下&nbsp;一&nbsp;步</button>
+			  
+			</form>
+		</div>	
+	</body>
+	
+	<script type="text/javascript">
+		// 判断并发送AJAX请求
+		// 获取上个页面传入的idCard
+		var idCard = $.getUrlParam("idCard");
+		$("#tpk-btn-next").click(function() {
+			// 获取第一次密码和第二次密码
+			var firstPass = $("#firstPass").val();
+			var secondPass = $("#secondPass").val();
+			
+			if(confirmPass(firstPass,secondPass)){
+				// 判断长度
+				if(firstPass.length < 6 || 
+					firstPass.length > 8){
+					//如果发生错误，输出报错
+					alert("输入密码不合法！！密码位数应在6 ~ 8 位之间");
+				}else{
+					// 如果都通过则发送AJAX请求 该请求参数说明：{idCard}/{password}/{who}/{recordLevel}/{remark}
+					$.ajax({
+						url: serverHttpURL + "/record/register/" + idCard +"/"+ firstPass+"/"+"null/"+"1/"+"null",
+						type: "POST",
+						dataType: "json",
+						success: function(json) {
+							if (json.state == 200) {
+								//成功了则输出成功并弹出确认框
+								if(confirm("是否继续登录？")){
+									location.href="./login.html";
+								}
+								else{
+									location.href="./index.html";
+								}
+							} else {
+								alert("注册失败！" + json.message);
+							}
+						},
+						error:function (xhr){
+							alert("登录时产生未知的异常"+xhr.message);
+						}
+					});
+				}
+			}
+			else{
+				alert("请确认两次密码是否一致");
+			}
+		});
+	</script>
+</html>

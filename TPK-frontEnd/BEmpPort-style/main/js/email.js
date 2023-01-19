@@ -1,0 +1,1 @@
+"use strict";+function(a,c){var b={};b.init=function(){a(".email-item, .back-to-mailbox").on("click",function(d){a(".email-content").toggleClass("open");d.preventDefault()});a("#send-to").selectize({delimiter:",",persist:false,create:function(d){return{value:d,text:d}}})};c.email=b}(jQuery,window);+function(a){email.init()}(jQuery);

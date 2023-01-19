@@ -1,0 +1,1 @@
+"use strict";+function(a,c){var b={};b.init=function(){dragula([board1,board2,board3])};c.task=b}(jQuery,window);+function(a){task.init()}(jQuery);
